@@ -1,0 +1,91 @@
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+}
+
+header {
+  display: flex;
+  justify-content: center;
+  background-color: #ddd;
+  gap: 10px;
+}
+
+.title {
+  color: #777;
+  font-size: 2.5rem;
+}
+
+.container {
+  max-width: 1040px;
+  margin: 0 auto;
+}
+
+.button-section {
+  margin: 1.2rem;
+  padding: 0.8rem 0.5rem;
+  display: flex;
+  justify-content: space-between;
+  gap: 1em;
+}
+
+.action-button {
+  align-items: center;
+  appearance: none;
+  background-color: #fff;
+  border: 1px solid #dbdbdb;
+  border-radius: .375em;
+  box-shadow: none;
+  box-sizing: border-box;
+  color: #363636;
+  cursor: pointer;
+  display: inline-flex;
+  font-family: "Fira Sans","Droid Sans","Helvetica Neue",Helvetica,Arial,sans-serif;
+  font-size: 1rem;
+  height: 2.5em;
+  justify-content: center;
+  line-height: 1.5;
+  padding: calc(.5em - 1px) 1em;
+  position: relative;
+  text-align: center;
+  user-select: none;
+  -webkit-user-select: none;
+  touch-action: manipulation;
+  vertical-align: top;
+  white-space: nowrap;
+  flex: 1;
+}
+
+.action-button:active {
+  border-color: #4a4a4a;
+  outline: 0;
+}
+
+.action-button:focus {
+  border-color: #485fc7;
+  outline: 0;
+}
+
+.action-button:hover {
+  border-color: #b5b5b5;
+}
+
+.action-button:focus:not(:active) {
+  box-shadow: rgba(72, 95, 199, .25) 0 0 0 .125em;
+}
+
+.action-button:nth-child(1):hover{
+  background-color: #83f28f;
+  color: #fff;
+  border: 1px #fff solid;
+  transition-duration: 150ms;
+}
+
+.action-button:nth-child(1n + 2):hover{
+  background-color: #85d7f5;
+  color: #fff;
+  border: 1px #fff solid;
+  transition-duration: 150ms;
+}
