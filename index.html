@@ -7,21 +7,29 @@
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
-  <header>
-    <h1 class="title">Task Tracker</h1>
-  </header>
-  <div class="container">
-    <main>
-      <section class="button-section">
-        <button class="action-button">Add</button>
-        <button class="action-button">Sort</button>
-        <button class="action-button">Filter</button>
-      </section>
-    </main>
-  </div>
-  <footer>
-    
-  </footer>
+  <main>
+    <div class="container">
+        <section class="button-section">
+          <button class="action-button">Add</button>
+          <button class="action-button">Sort</button>
+          <button class="action-button">Filter</button>
+        </section>
+        <section class="task-cards">
+          <div class="card">
+            <div class="status">
+              <img src="image/accept.png" alt="checked" class="checked">
+              <div>Completed</div>
+            </div>
+            <div class="task-name">Study JavaScript</div>
+            <div class="description">Study objects and array methods</div>
+            <div class="deadline">
+              <img src="image/calendar.png" alt="calendar">
+              <div>June 30, 2023</div>
+            </div>
+          </div>
+        </section>
+      </div>
+  </main>
   <script src="script.js"></script>
 </body>
 </html>
