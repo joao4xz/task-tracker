@@ -1,4 +1,5 @@
 (function(){
+  //ADD/SORT/FILTER BAR
   let addButton = document.getElementById('Add');
   let addHelper = document.getElementById('add-helper');
 
@@ -6,39 +7,27 @@
   let sortHelper = document.getElementById('sort-helper');
 
   addButton.addEventListener('click', () => {
-    let addHelperDisplayStyle = window.getComputedStyle(addHelper).display;
-    if(addHelperDisplayStyle === 'none') {
-      addHelper.style.display = 'flex';
-      sortHelper.style.display = 'none';
-    }
-    else{
-      addHelper.style.display = 'none';
-    }
+    changeDisplay(addHelper, sortHelper);
   });
-
   sortButton.addEventListener('click', () => {
-    let sortHelperDisplayStyle = window.getComputedStyle(sortHelper).display;
-    if(sortHelperDisplayStyle === 'none') {
-      sortHelper.style.display = 'flex';
-      addHelper.style.display = 'none';
+    changeDisplay(sortHelper, addHelper);
+  });
+
+  function changeDisplay(mainHelper, hiddenHelper) {
+    let helperDisplayStyle = window.getComputedStyle(mainHelper).display;
+    if(helperDisplayStyle === 'none') {
+      mainHelper.style.display = 'flex';
+      hiddenHelper.style.display = 'none';
     }
     else{
-      sortHelper.style.display = 'none';
+      mainHelper.style.display = 'none';
     }
-  });
+  }
 
-  let removeCardButtons = document.querySelectorAll('.X-button');
-
-  removeCardButtons.forEach( function(button){
-    button.addEventListener('click', function(){
-      let card = this.closest('.task-cards > div');
-
-      card.remove();
-    });
-  });
-
+  //ADD BUTTON SUB BAR
   const cards = [];
 
+  //Add task card to the cards array
   function addCard(title, description, deadline, status) {
     const card = {
       title: title,
@@ -49,6 +38,7 @@
     cards.push(card);
   }
 
+  //Render a card with i being the array index
   function renderCard(i) {
     // Create elements
     const card = document.createElement('div');
@@ -61,7 +51,6 @@
       card.classList.add('card', 'not-completed-card');
       status.classList.add('not-completed-status');
     }
-
 
     const left = document.createElement('div');
     left.classList.add('left');
@@ -201,8 +190,29 @@
     isDescendingOrder = !isDescendingOrder;
   }
 
+  function sortCardsByStatus() {
+    cards.sort((a, b) => {
+        // Compare the status values based on the sorting order state
+        if (isDescendingOrder) {
+          return b.status.localeCompare(a.status); // Sort in descending order
+        } else {
+          return a.status.localeCompare(b.status); // Sort in ascending order
+        }
+      });
+  
+      let parentDiv = document.querySelector('.task-cards');
+      parentDiv.innerHTML = "";
+
+      for(let i = 0; i<cards.length; i++){
+        renderCard(i);
+      }
+      isDescendingOrder = !isDescendingOrder; // Toggle the sorting order state
+  }
+
   let deadlineSort = document.getElementById('deadline-sort');
+  let statusSort = document.getElementById('status-sort');
 
   deadlineSort.addEventListener('click', sortCardsByDeadline);
+  statusSort.addEventListener('click', sortCardsByStatus);
 
 })();
