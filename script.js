@@ -22,9 +22,6 @@
     });
   });
 
-  let confirmButton = document.getElementById('confirm');
-  
-
   const cards = [];
 
   function addCard(title, description, deadline, status) {
@@ -122,6 +119,7 @@
     const container = document.querySelector('.task-cards');
     container.appendChild(card);
   }
+  let confirmButton = document.getElementById('confirm');
 
   confirmButton.addEventListener('click', () => {
     const inputtitle = document.getElementById('input-title').value;
@@ -139,14 +137,21 @@
     // Format the date as "Month day, year"
     let formattedDeadline = deadlineDate.toLocaleString('en-US', { month: 'long', day: 'numeric', year: 'numeric' });
 
-    addCard(inputtitle, inputdescription, formattedDeadline, inputstatus);
+    //Check if the input title is repeated
+    const isTitleRepeated = cards.some((card) => card.title === inputtitle);
 
-    // console.log(inputtitle);
-    // console.log(inputdescription);
-    // console.log(formattedDeadline);
-    // console.log(inputstatus);
-    console.log(cards);
-
-    renderCard();
+    if(inputtitle !== "" && inputdescription !== "" && inputdeadline !== ""){
+      if(isTitleRepeated) {
+        alert("A task with the same title already exists.");
+      }
+      else {
+        addCard(inputtitle, inputdescription, formattedDeadline, inputstatus);
+        console.log(cards);
+        renderCard();
+      }
+    }
+    else {
+      alert("Please fill in all required fields.");
+    }
   });
 })();
