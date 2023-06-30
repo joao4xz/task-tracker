@@ -49,11 +49,11 @@
     cards.push(card);
   }
 
-  function renderCard() {
+  function renderCard(i) {
     // Create elements
     const card = document.createElement('div');
     const status = document.createElement('div');
-    if(cards[cards.length-1].status === 'Completed'){
+    if(cards[i].status === 'Completed'){
       card.classList.add('card', 'completed-card');
       status.classList.add('completed-status');
     }
@@ -67,7 +67,7 @@
     left.classList.add('left');
 
     const checkedImg = document.createElement('img');
-    if(cards[cards.length-1].status === 'Completed'){
+    if(cards[i].status === 'Completed'){
       checkedImg.src = 'image/accept.png';
     }
     else{
@@ -77,7 +77,7 @@
     checkedImg.classList.add('checked');
 
     const statusText = document.createElement('div');
-    statusText.textContent = cards[cards.length-1].status;
+    statusText.textContent = cards[i].status;
 
     const right = document.createElement('div');
     right.classList.add('right');
@@ -92,6 +92,7 @@
         cards.splice(index, 1);
       }
       card.remove();
+      console.log(cards);
     });
 
     const crossImg = document.createElement('img');
@@ -100,11 +101,11 @@
 
     const taskName = document.createElement('div');
     taskName.classList.add('task-name');
-    taskName.textContent = cards[cards.length-1].title;
+    taskName.textContent = cards[i].title;
 
     const taskDescription = document.createElement('div');
     taskDescription.classList.add('description');
-    taskDescription.textContent = cards[cards.length-1].description;
+    taskDescription.textContent = cards[i].description;
 
     const taskDeadline = document.createElement('div');
     taskDeadline.classList.add('deadline');
@@ -114,7 +115,7 @@
     calendarImg.alt = 'calendar';
 
     const deadlineText = document.createElement('div');
-    deadlineText.textContent = cards[cards.length-1].deadline;
+    deadlineText.textContent = cards[i].deadline;
 
     // Build the structure
     left.appendChild(checkedImg);
@@ -165,12 +166,43 @@
       }
       else {
         addCard(inputtitle, inputdescription, formattedDeadline, inputstatus);
+        renderCard(cards.length-1);
         console.log(cards);
-        renderCard();
       }
     }
     else {
       alert("Please fill in all required fields.");
     }
   });
+
+  let isDescendingOrder = false;
+
+  function sortCardsByDeadline() {
+    cards.sort((a, b) => {
+      const deadlineDateA = new Date(a.deadline);
+      const deadlineDateB = new Date(b.deadline);
+      
+      // Compare the deadline dates based on the sorting order state
+      if (isDescendingOrder) {
+        return deadlineDateB - deadlineDateA; // Sort in descending order
+      } else {
+        return deadlineDateA - deadlineDateB; // Sort in ascending order
+      }
+    });
+
+    let parentDiv = document.querySelector('.task-cards');
+    parentDiv.innerHTML = "";
+
+    for(let i = 0; i<cards.length; i++){
+      renderCard(i);
+    }
+
+    // Toggle the sorting order state for the next click
+    isDescendingOrder = !isDescendingOrder;
+  }
+
+  let deadlineSort = document.getElementById('deadline-sort');
+
+  deadlineSort.addEventListener('click', sortCardsByDeadline);
+
 })();
