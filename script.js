@@ -72,6 +72,10 @@
 
     xButton.addEventListener('click', function(){
       let card = this.closest('.task-cards > div');
+      let index = cards.findIndex(c => c.title === card.querySelector('.task-name').textContent);
+      if (index !== -1) {
+        cards.splice(index, 1);
+      }
       card.remove();
     });
 
