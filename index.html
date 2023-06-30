@@ -10,9 +10,39 @@
   <main>
     <div class="container">
         <section class="button-section">
-          <button class="action-button">Add</button>
-          <button class="action-button">Sort</button>
-          <button class="action-button">Filter</button>
+          <button class="action-button" id="Add">Add</button>
+          <button class="action-button" id="Sort">Sort</button>
+          <button class="action-button" id="Filter">Filter</button>
+        </section>
+        <section class="button-helper">
+          <div id="add-helper">
+            <div class="title-box">
+              <label for="input-title">Task title:</label>
+              <input type="text" id="input-title">
+            </div>
+            <div class="description-box">
+              <label for="input-description">Task description:</label>
+              <input type="text" id="input-description">
+            </div>
+            <div class="deadline-box">
+              <label for="input-deadline">Deadline:</label>
+              <input type="date">
+            </div>
+            <div class="status-box">
+              <label for="input-status">Status:</label>
+              <select name="status" id="input-status">
+                <option value="Completed">Completed</option>
+                <option value="Not Completed">Not Completed</option>
+              </select>
+            </div>
+            <button class="action-button confirm">Confirmar</button>
+          </div>
+          <div id="sort-helper">
+
+          </div>
+          <div id="filter-helper">
+
+          </div>
         </section>
         <section class="task-cards">
           <div class="completed-card">
