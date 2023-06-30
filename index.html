@@ -26,7 +26,7 @@
             </div>
             <div class="deadline-box">
               <label for="input-deadline">Deadline:</label>
-              <input type="date">
+              <input type="date" id="input-deadline">
             </div>
             <div class="status-box">
               <label for="input-status">Status:</label>
@@ -35,7 +35,7 @@
                 <option value="Not Completed">Not Completed</option>
               </select>
             </div>
-            <button class="action-button confirm">Confirmar</button>
+            <button class="action-button" id="confirm">Confirmar</button>
           </div>
           <div id="sort-helper">
 
@@ -45,10 +45,17 @@
           </div>
         </section>
         <section class="task-cards">
-          <div class="completed-card">
+          <div class="card completed-card">
             <div class="completed-status">
-              <img src="image/accept.png" alt="checked" class="checked">
-              <div>Completed</div>
+              <div class="left">
+                <img src="image/accept.png" alt="checked" class="checked">
+                <div>Completed</div>
+              </div>
+              <div class="right">
+                <button class="X-button">
+                  <img src="image/cross.png" alt="cross">
+                </button>
+              </div>
             </div>
             <div class="task-name">Study JavaScript</div>
             <div class="description">Study objects and array methods</div>
@@ -57,10 +64,17 @@
               <div>June 30, 2023</div>
             </div>
           </div>
-          <div class="not-completed-card">
+          <div class="card not-completed-card">
             <div class="not-completed-status">
-              <img src="image/delete.png" alt="checked" class="checked">
-              <div>Not Completed</div>
+              <div class="left">
+                <img src="image/delete.png" alt="checked" class="checked">
+                <div>Not Completed</div>
+              </div>
+              <div class="right">
+                <button class="X-button">
+                  <img src="image/cross.png" alt="cross">
+                </button>
+              </div>
             </div>
             <div class="task-name">Study JavaScript</div>
             <div class="description">Study objects and array methods</div>

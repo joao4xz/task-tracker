@@ -9,7 +9,7 @@ body {
 .container {
   height: 100vh;
   display: flex;
-  justify-content: center;
+  justify-content: start;
   align-items: center;
   flex-direction: column;
 }
@@ -19,6 +19,7 @@ body {
   justify-content: space-between;
   gap: 1em;
   width: 1125px;
+  margin-top: 30px;
 }
 
 .action-button {
@@ -67,7 +68,7 @@ body {
 }
 
 .action-button:nth-child(1):hover,
-.confirm:hover{
+#confirm:hover{
   background-color: rgb(217,246,217);
   color: rgb(126,221,126);
   border: 1px #fff solid;
@@ -84,7 +85,7 @@ body {
 
 #add-helper {
   width: 1125px;
-  display: flex;
+  display: none;
   align-items: center;
   gap: 15px;
   margin: 20px 0 0 0;
@@ -96,24 +97,27 @@ body {
 }
 
 .task-cards {
-  width: 100%;
+  width: 1125px;
   display: flex;
   align-items: center;
-  flex-direction: column;
+  /* flex-direction: column; */
+  justify-content: center;
+  flex-wrap: wrap;
   gap: 20px;
   margin-top: 20px;
 }
 
-.completed-card {
-  width: 25%;
-  border: 2px solid green;
+.card {
+  width: 22rem;
   border-radius: 0.5rem;
 }
 
+.completed-card {
+  border: 2px solid green;
+}
+
 .not-completed-card {
-  width: 25%;
   border: 2px solid red;
-  border-radius: 0.5rem;
 }
 
 .completed-status {
@@ -124,8 +128,33 @@ body {
   padding: 10px;
   display: flex;
   align-items: center;
+  justify-content: space-between;
   gap: 5px;
   border-radius: 0.5rem 0.5rem 0 0;
+}
+
+.left {
+  display:flex;
+  align-items: center;
+  gap: 5px;
+}
+
+.right {
+  display: flex;
+  align-items: center;
+  height: 16px;
+  width: 16px;
+}
+
+.X-button {
+  border: none;
+  cursor: pointer;
+  appearance: none;
+  background-color: inherit;
+  height: 16px;
+  width: 16px;
+  display: flex;
+  justify-content: center;
 }
 
 .not-completed-status {
@@ -136,6 +165,7 @@ body {
   padding: 10px;
   display: flex;
   align-items: center;
+  justify-content: space-between;
   gap: 5px;
   border-radius: 0.5rem 0.5rem 0 0;
 }
