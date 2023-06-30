@@ -6,18 +6,25 @@
   let sortButton = document.getElementById('Sort');
   let sortHelper = document.getElementById('sort-helper');
 
+  let filterButton = document.getElementById('Filter');
+  let filterHelper = document.getElementById('filter-helper');
+
   addButton.addEventListener('click', () => {
-    changeDisplay(addHelper, sortHelper);
+    changeDisplay(addHelper, sortHelper, filterHelper);
   });
   sortButton.addEventListener('click', () => {
-    changeDisplay(sortHelper, addHelper);
+    changeDisplay(sortHelper, addHelper, filterHelper);
+  });
+  filterButton.addEventListener('click', () => {
+    changeDisplay(filterHelper, addHelper, sortHelper);
   });
 
-  function changeDisplay(mainHelper, hiddenHelper) {
+  function changeDisplay(mainHelper, firstHiddenHelper, secondHiddenHelper) {
     let helperDisplayStyle = window.getComputedStyle(mainHelper).display;
     if(helperDisplayStyle === 'none') {
       mainHelper.style.display = 'flex';
-      hiddenHelper.style.display = 'none';
+      firstHiddenHelper.style.display = 'none';
+      secondHiddenHelper.style.display = 'none';
     }
     else{
       mainHelper.style.display = 'none';
