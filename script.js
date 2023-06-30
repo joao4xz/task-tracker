@@ -46,11 +46,11 @@
   }
 
   //Render a card with i being the array index
-  function renderCard(i) {
+  function renderCard(i, renderedCard) {
     // Create elements
     const card = document.createElement('div');
     const status = document.createElement('div');
-    if(cards[i].status === 'Completed'){
+    if(renderedCard[i].status === 'Completed'){
       card.classList.add('card', 'completed-card');
       status.classList.add('completed-status');
     }
@@ -63,7 +63,7 @@
     left.classList.add('left');
 
     const checkedImg = document.createElement('img');
-    if(cards[i].status === 'Completed'){
+    if(renderedCard[i].status === 'Completed'){
       checkedImg.src = 'image/accept.png';
     }
     else{
@@ -73,7 +73,7 @@
     checkedImg.classList.add('checked');
 
     const statusText = document.createElement('div');
-    statusText.textContent = cards[i].status;
+    statusText.textContent = renderedCard[i].status;
 
     const right = document.createElement('div');
     right.classList.add('right');
@@ -83,12 +83,12 @@
 
     xButton.addEventListener('click', function(){
       let card = this.closest('.task-cards > div');
-      let index = cards.findIndex(c => c.title === card.querySelector('.task-name').textContent);
+      let index = renderedCard.findIndex(c => c.title === card.querySelector('.task-name').textContent);
       if (index !== -1) {
-        cards.splice(index, 1);
+        renderedCard.splice(index, 1);
       }
       card.remove();
-      console.log(cards);
+      console.log(renderedCard);
     });
 
     const crossImg = document.createElement('img');
@@ -97,11 +97,11 @@
 
     const taskName = document.createElement('div');
     taskName.classList.add('task-name');
-    taskName.textContent = cards[i].title;
+    taskName.textContent = renderedCard[i].title;
 
     const taskDescription = document.createElement('div');
     taskDescription.classList.add('description');
-    taskDescription.textContent = cards[i].description;
+    taskDescription.textContent = renderedCard[i].description;
 
     const taskDeadline = document.createElement('div');
     taskDeadline.classList.add('deadline');
@@ -111,7 +111,7 @@
     calendarImg.alt = 'calendar';
 
     const deadlineText = document.createElement('div');
-    deadlineText.textContent = cards[i].deadline;
+    deadlineText.textContent = renderedCard[i].deadline;
 
     // Build the structure
     left.appendChild(checkedImg);
@@ -162,7 +162,7 @@
       }
       else {
         addCard(inputtitle, inputdescription, formattedDeadline, inputstatus);
-        renderCard(cards.length-1);
+        renderCard(cards.length-1, cards);
         console.log(cards);
       }
     }
@@ -170,6 +170,13 @@
       alert("Please fill in all required fields.");
     }
   });
+
+  //ADD SORT SUB BAR
+  let deadlineSort = document.getElementById('deadline-sort');
+  let statusSort = document.getElementById('status-sort');
+
+  deadlineSort.addEventListener('click', sortCardsByDeadline);
+  statusSort.addEventListener('click', sortCardsByStatus);
 
   let isDescendingOrder = false;
 
@@ -186,14 +193,8 @@
       }
     });
 
-    let parentDiv = document.querySelector('.task-cards');
-    parentDiv.innerHTML = "";
+    renderCardsArray(cards);
 
-    for(let i = 0; i<cards.length; i++){
-      renderCard(i);
-    }
-
-    // Toggle the sorting order state for the next click
     isDescendingOrder = !isDescendingOrder;
   }
 
@@ -207,19 +208,47 @@
         }
       });
   
-      let parentDiv = document.querySelector('.task-cards');
-      parentDiv.innerHTML = "";
+      renderCardsArray(cards);
 
-      for(let i = 0; i<cards.length; i++){
-        renderCard(i);
-      }
       isDescendingOrder = !isDescendingOrder; // Toggle the sorting order state
   }
 
-  let deadlineSort = document.getElementById('deadline-sort');
-  let statusSort = document.getElementById('status-sort');
+  function renderCardsArray(cardsArray) {
+    let parentDiv = document.querySelector('.task-cards');
+    parentDiv.innerHTML = "";
 
-  deadlineSort.addEventListener('click', sortCardsByDeadline);
-  statusSort.addEventListener('click', sortCardsByStatus);
+    for(let i = 0; i<cardsArray.length; i++){
+      renderCard(i, cardsArray);
+    }
+  }
+
+  //ADD FILTER SUB BAR
+  function filterCardsByStatus(status) {
+    return cards.filter(card => card.status === status);
+  }
+
+  let filterStatus = document.getElementById('completed-status');
+  let filterNotStatus = document.getElementById('not-completed-status');
+  let isFiltered = false;
+  filterStatus.addEventListener('click', () => {
+    if(!isFiltered){
+      const filteredCards = filterCardsByStatus('Completed');
+      renderCardsArray(filteredCards);
+    }
+    else {
+      renderCardsArray(cards);
+    }
+    isFiltered = !isFiltered;
+  });
+  filterNotStatus.addEventListener('click', () => {
+    if(!isFiltered){
+      const filteredCards = filterCardsByStatus("Not Completed");
+      renderCardsArray(filteredCards);
+    }
+    else {
+      renderCardsArray(cards);
+    }
+    isFiltered = !isFiltered;
+  });
 
 })();
