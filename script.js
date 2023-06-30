@@ -2,13 +2,28 @@
   let addButton = document.getElementById('Add');
   let addHelper = document.getElementById('add-helper');
 
+  let sortButton = document.getElementById('Sort');
+  let sortHelper = document.getElementById('sort-helper');
+
   addButton.addEventListener('click', () => {
     let addHelperDisplayStyle = window.getComputedStyle(addHelper).display;
     if(addHelperDisplayStyle === 'none') {
       addHelper.style.display = 'flex';
+      sortHelper.style.display = 'none';
     }
     else{
       addHelper.style.display = 'none';
+    }
+  });
+
+  sortButton.addEventListener('click', () => {
+    let sortHelperDisplayStyle = window.getComputedStyle(sortHelper).display;
+    if(sortHelperDisplayStyle === 'none') {
+      sortHelper.style.display = 'flex';
+      addHelper.style.display = 'none';
+    }
+    else{
+      sortHelper.style.display = 'none';
     }
   });
 

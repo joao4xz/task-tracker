@@ -96,6 +96,31 @@ body {
   color: #363636;
 }
 
+#sort-helper {
+  width: 1125px;
+  display: none;
+  align-items: center;
+  gap: 15px;
+  margin: 20px 0 0 0;
+  padding: 10px;
+  border: 1px solid #dbdbdb;
+  border-radius: .375em;
+  font-family: "Fira Sans","Droid Sans","Helvetica Neue",Helvetica,Arial,sans-serif;
+  color: #363636;
+}
+
+#deadline-sort:hover,
+#status-sort:hover {
+  background-color: rgb(166, 216, 255);
+  color: rgb(20, 71, 160);
+  border: 1px solid #fff;
+  transition-duration: 150ms;
+}
+
+#filter-helper {
+
+}
+
 .task-cards {
   width: 1125px;
   display: flex;
