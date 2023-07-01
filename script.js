@@ -72,6 +72,45 @@
     checkedImg.alt = 'checked';
     checkedImg.classList.add('checked');
 
+    const checkedImgButton = document.createElement('button');
+    checkedImgButton.classList.add('X-button');
+
+    checkedImgButton.addEventListener('click', function() {
+      console.log("Funcionando!");
+      let card = this.closest('.card');
+      let buttonImage = card.querySelector('.checked');
+      let statusText = this.nextSibling;
+      let index = renderedCard.findIndex(c => c.title === card.querySelector('.task-name').textContent);
+      if (index !== 1) {
+        if(renderedCard[index].status === 'Completed'){
+          renderedCard[index].status = 'Not Completed';
+          card.classList.add('not-completed-card');
+          card.classList.remove('completed-card');
+
+          let status = this.closest('.completed-status');
+          status.classList.add('not-completed-status');
+          status.classList.remove('completed-status');
+
+          buttonImage.src = 'image/delete.png';
+
+          statusText.textContent = 'Not Completed'
+        }
+        else {
+          renderedCard[index].status = 'Completed';
+          card.classList.add('completed-card');
+          card.classList.remove('not-completed-card');
+
+          let status = this.closest('.not-completed-status');
+          status.classList.add('completed-status');
+          status.classList.remove('not-completed-status');
+
+          buttonImage.src = 'image/accept.png';
+
+          statusText.textContent = 'Completed'
+        }
+      }
+    });
+
     const statusText = document.createElement('div');
     statusText.textContent = renderedCard[i].status;
 
@@ -114,7 +153,8 @@
     deadlineText.textContent = renderedCard[i].deadline;
 
     // Build the structure
-    left.appendChild(checkedImg);
+    left.appendChild(checkedImgButton);
+    checkedImgButton.appendChild(checkedImg);
     left.appendChild(statusText);
 
     right.appendChild(xButton);
@@ -146,7 +186,7 @@
     // Parse input deadline as Date object
     let deadlineDate = new Date(inputdeadline);
 
-     // Adjust for time zone offset
+    // Adjust for time zone offset
     let timeZoneOffset = deadlineDate.getTimezoneOffset();
     deadlineDate.setMinutes(deadlineDate.getMinutes() + timeZoneOffset);
 
